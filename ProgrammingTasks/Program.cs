@@ -6,8 +6,8 @@ TwoWaySet node3 = new TwoWaySet(8, node2);
 TwoWaySet node4 = new TwoWaySet(3, node3);
 TwoWaySet node5 = new TwoWaySet(19, node4);
 
-//TwoWaySet.Print(node1);
-TwoWaySet.Reversal(node1);
+TwoWaySet.Print(node1);    // 15, 34, 8, 3, 19
+TwoWaySet.Reversal(node1); // 19, 3, 8, 34, 15
 
 
 class TwoWaySet
@@ -29,25 +29,20 @@ class TwoWaySet
         int count = head.Count(head);
         for (int i = 0; i < count; i++)
         {
-            TwoWaySet storage = head;
-            if(storage.before == null)
+            TwoWaySet containerBefore = head.before;
+            TwoWaySet containerAfter = head.after;
+            
+            head.before = containerAfter;
+            head.after = containerBefore;
+
+            if(containerAfter == null)
             {
-                head.after = null;
-                head.before = storage.after;
+                TwoWaySet.Print(head);
+                break;
             }
-            else if(head.after == null)
-            {
-                head.after = storage.before;
-                head.before = null;
-            }
-            else
-            {
-                head.before = storage.after;
-                head.after = storage.before;
-            }
-            head = storage.after;
+
+            head = containerAfter;
         }
-        TwoWaySet.Print(head);
     }
     public static void Print(TwoWaySet head)
     {
