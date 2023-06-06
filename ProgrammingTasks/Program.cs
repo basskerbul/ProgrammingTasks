@@ -26,6 +26,8 @@ class TwoWaySet
     }
     public static void Reversal(TwoWaySet head)
     {
+        if (head.IsLoop(head))
+            throw new Exception("Список не должен быть замкнутым");
         int count = head.Count(head);
         for (int i = 0; i < count; i++)
         {
@@ -75,7 +77,7 @@ class TwoWaySet
     /// <param name="head"></param>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
-    public bool IsLoop(TwoWaySet head)
+    bool IsLoop(TwoWaySet head)
     {
         if (head.before == null)
         {
@@ -111,3 +113,4 @@ class TwoWaySet
         return false;
     }
 }
+
